@@ -1,24 +1,82 @@
-import Image from "next/image";
-import logo from "../../public/appleWatchLogo.svg";
+"use client";
+
+import { useState } from "react";
+
+import GreetingWrapper from "./components/greetingWrapper";
+
+import Header from "./components/header";
+import Actions from "./components/actions";
+import Products from "./components/products";
+import { useWatchContext } from "./context/watchContext";
+import { CollectionNames } from "./context/watchContext";
+import { WatchCarousel } from "./components/watchCarousel";
+
+export enum WatchViewTypes {
+  FRONT = "FRONT",
+  SIDE = "SIDE",
+}
+
+export type TWatchViewTypes = WatchViewTypes | null;
 
 export default function Home() {
+  const { selectedCollection, selectedFilter, setSelectedFilter } =
+    useWatchContext();
+  const [watchView, setWatchView] = useState<TWatchViewTypes>(null); // front view on true, side view on false
+  const [isStarted, setIsStarted] = useState(false);
+  const [selectedWatch, setSelectedWatch] = useState({
+    size: "",
+    case: "",
+    band: "",
+  });
+
+  const handleGetStarted = () => {
+    setTimeout(() => {
+      setIsStarted(true);
+      setWatchView(WatchViewTypes.FRONT);
+    }, 500);
+  };
+
+  const toggleExpand = (value: string) => {
+    setSelectedFilter(value);
+  };
+
+  const handleOptionClick = (selectedOption: object) => {
+    const [[key, value]] = Object.entries(selectedOption);
+    setSelectedWatch((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
+
+  const handleViewClick = () => {
+    setWatchView((prev) =>
+      prev === WatchViewTypes.FRONT ? WatchViewTypes.SIDE : WatchViewTypes.FRONT
+    );
+  };
+
   return (
-    <div>
-      <div className="ml-8 mt-8">
-        <Image alt="apple watch logo" width={90} src={logo} />
-      </div>
-      <div className="mt-20 w-full flex justify-center">
-        <div className="flex flex-col gap-2">
-          <span className="font-sf text-xl mb-2">Apple Watch Studio</span>
-          <span className="font-sf font-[620] text-6xl">Choose a case.</span>
-          <span className="font-sf font-[620] text-6xl">Pick a band.</span>
-          <span className="font-sf font-[620] text-6xl mr-20">
-            Create your own style.
-          </span>
-          <button className="mt-10 py-2.5 px-6 bg-[#0071e3] font-sf rounded-full text-white self-start w-auto">
-            Get started
-          </button>
-        </div>
+    <div className="h-full ">
+      <Header isStarted={isStarted} />
+      <div
+        className={`h-[calc(100vh-72px)] grid greetingsAnimate ${
+          isStarted ? "grid-rows-[80%_15%]" : "grid-rows-[50%_50%]"
+        }`}
+      >
+        <GreetingWrapper
+          handleGetStarted={handleGetStarted}
+          isStarted={isStarted}
+        />
+        <Products
+          isStarted={isStarted}
+          handleViewClick={handleViewClick}
+          watchView={watchView}
+        />
+        <Actions
+          isStarted={isStarted}
+          toggleExpand={toggleExpand}
+          handleOptionClick={handleOptionClick}
+          watchView={watchView}
+        />
       </div>
     </div>
   );
