@@ -4,6 +4,7 @@ import { CollectionsList } from "./collectionsList";
 import logo from "../../../public/appleWatchLogo.svg";
 import expandIcon from "../../../public/expandIcon.svg";
 import { useState } from "react";
+import { useWatchContext } from "../context/watchContext";
 
 interface HeaderProps {
   isStarted: boolean;
@@ -11,9 +12,14 @@ interface HeaderProps {
 
 const Header = ({ isStarted }: HeaderProps) => {
   const [collectionListOpen, setCollectionListOpen] = useState(false);
+  const { selectedWatch, selectedCollectionData } = useWatchContext();
 
   const handleClick = () => {
     setCollectionListOpen((prev) => !prev);
+  };
+
+  const handleSubmit = () => {
+    window.alert(`You selected ${selectedWatch?.pdpName}`);
   };
 
   return (

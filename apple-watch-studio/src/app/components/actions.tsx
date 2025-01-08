@@ -4,21 +4,33 @@ import buttonBand from "../../../public/watchBand.svg";
 import buttonCase from "../../../public/watchCase.svg";
 import buttonSize from "../../../public/watchSize.svg";
 import { TWatchViewTypes } from "../page";
-import { useWatchContext } from "../context/watchContext";
+import { TSelectedFilter, useWatchContext } from "../context/watchContext";
 
 interface ActionsProps {
-  toggleExpand: (value: string) => void;
-  handleOptionClick: ({}) => void;
+  toggleExpand: (value: TSelectedFilter) => void;
   isStarted: boolean;
   watchView: TWatchViewTypes;
 }
 
-const Actions = ({
-  toggleExpand,
-  handleOptionClick,
-  isStarted,
-}: ActionsProps) => {
-  const { selectedCollection, selectedFilter, ...rest } = useWatchContext();
+const Actions = ({ toggleExpand, isStarted }: ActionsProps) => {
+  const {
+    selectedCollection,
+    selectedFilter,
+    selectedWatch,
+    setSelectedOption,
+    selectedCollectionData,
+    ...rest
+  } = useWatchContext();
+
+  const handleOptionClick = (selectedOption: object) => {
+    const [[key, value]] = Object.entries(selectedOption);
+    setSelectedOption((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
+
+  console.log(selectedCollectionData);
 
   return (
     <div
@@ -36,8 +48,10 @@ const Actions = ({
             {rest[selectedFilter][selectedCollection].options.map((item) => (
               <span
                 key={item.value}
-                onClick={() => handleOptionClick({ size: item.value })}
-                className="cursor-pointer hover:underline active:underline active:font-semibold"
+                onClick={() => handleOptionClick({ size: item.text })}
+                className={`cursor-pointer ${
+                  selectedWatch.size === item.text ? "font-semibold" : ""
+                } `}
               >
                 {item.text}
               </span>
@@ -60,8 +74,13 @@ const Actions = ({
             {rest[selectedFilter][selectedCollection].options.map((item) => (
               <span
                 key={item.value}
-                onClick={() => handleOptionClick({ case: item.value })}
-                className="cursor-pointer hover:underline active:underline active:font-semibold"
+                onClick={() => handleOptionClick({ case: item.text })}
+                className={`cursor-pointer ${
+                  selectedCollectionData?.case.dimension
+                    .watch_cases_dimensionCaseMaterial === item.value
+                    ? "font-semibold"
+                    : ""
+                }`}
               >
                 {item.text}
               </span>
@@ -84,8 +103,13 @@ const Actions = ({
             {rest[selectedFilter][selectedCollection].options.map((item) => (
               <span
                 key={item.value}
-                onClick={() => handleOptionClick({ band: item.value })}
-                className="cursor-pointer hover:underline active:underline active:font-semibold"
+                onClick={() => handleOptionClick({ band: item.text })}
+                className={`cursor-pointer ${
+                  selectedCollectionData?.band.dimension
+                    .watch_bands_dimensionMaterial === item.value
+                    ? "font-semibold"
+                    : ""
+                }`}
               >
                 {item.text}
               </span>

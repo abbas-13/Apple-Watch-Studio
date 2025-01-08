@@ -7,9 +7,7 @@ import GreetingWrapper from "./components/greetingWrapper";
 import Header from "./components/header";
 import Actions from "./components/actions";
 import Products from "./components/products";
-import { useWatchContext } from "./context/watchContext";
-import { CollectionNames } from "./context/watchContext";
-import { WatchCarousel } from "./components/watchCarousel";
+import { TSelectedFilter, useWatchContext } from "./context/watchContext";
 
 export enum WatchViewTypes {
   FRONT = "FRONT",
@@ -19,15 +17,9 @@ export enum WatchViewTypes {
 export type TWatchViewTypes = WatchViewTypes | null;
 
 export default function Home() {
-  const { selectedCollection, selectedFilter, setSelectedFilter } =
-    useWatchContext();
+  const { setSelectedFilter } = useWatchContext();
   const [watchView, setWatchView] = useState<TWatchViewTypes>(null); // front view on true, side view on false
   const [isStarted, setIsStarted] = useState(false);
-  const [selectedWatch, setSelectedWatch] = useState({
-    size: "",
-    case: "",
-    band: "",
-  });
 
   const handleGetStarted = () => {
     setTimeout(() => {
@@ -36,16 +28,8 @@ export default function Home() {
     }, 500);
   };
 
-  const toggleExpand = (value: string) => {
+  const toggleExpand = (value: TSelectedFilter) => {
     setSelectedFilter(value);
-  };
-
-  const handleOptionClick = (selectedOption: object) => {
-    const [[key, value]] = Object.entries(selectedOption);
-    setSelectedWatch((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
   };
 
   const handleViewClick = () => {
@@ -74,7 +58,6 @@ export default function Home() {
         <Actions
           isStarted={isStarted}
           toggleExpand={toggleExpand}
-          handleOptionClick={handleOptionClick}
           watchView={watchView}
         />
       </div>

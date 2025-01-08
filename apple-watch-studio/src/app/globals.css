@@ -77,3 +77,7 @@ body {
 .button-prev {
   left: 10px;
 }
+
+.swiper-wrapper {
+  transition-duration: 500ms !important;
+}
