@@ -12,14 +12,18 @@ interface HeaderProps {
 
 const Header = ({ isStarted }: HeaderProps) => {
   const [collectionListOpen, setCollectionListOpen] = useState(false);
-  const { selectedWatch, selectedCollectionData } = useWatchContext();
+  const { selectedWatch } = useWatchContext();
 
   const handleClick = () => {
     setCollectionListOpen((prev) => !prev);
   };
 
   const handleSubmit = () => {
-    window.alert(`You selected ${selectedWatch?.pdpName}`);
+    window.alert(
+      `You selected ${selectedWatch?.pdpName} which starts from ${
+        selectedWatch?.price.split(">")[1].split("<")[0]
+      }`
+    );
   };
 
   return (
@@ -46,7 +50,10 @@ const Header = ({ isStarted }: HeaderProps) => {
             isStarted ? "opacity-100" : "opacity-0"
           } transition-opacity duration-1000 ease-linear `}
         >
-          <button className="py-[7px] px-4 bg-[#0071e3] text-[14px] text-white font-sf rounded-full text-white self-start w-auto">
+          <button
+            onClick={handleSubmit}
+            className="py-[7px] px-4 bg-[#0071e3] text-[14px] text-white font-sf rounded-full text-white self-start w-auto"
+          >
             Save
           </button>
         </div>
