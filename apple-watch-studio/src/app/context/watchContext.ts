@@ -19,6 +19,11 @@ interface TWatchOptions {
   value: string;
 }
 
+interface TDimension {
+  watch_cases_dimensionCaseMaterial: string;
+  watch_bands_dimensionMaterial: string;
+}
+
 interface TWatchProducts {
   collectionName: string;
   fromPrice: string;
@@ -27,12 +32,14 @@ interface TWatchProducts {
   productName: string;
   watchBandImage: string;
   watchCaseImage: string;
+  pdpProductName: string;
+  dimension: TDimension;
 }
 
 export interface TSelectedCollectionData {
-  size: { products: Partial<TWatchProducts>; options: TWatchOptions[] };
-  case: { products: Partial<TWatchProducts>; options: TWatchOptions[] };
-  band: { products: Partial<TWatchProducts>; options: TWatchOptions[] };
+  size: Partial<TWatchProducts>;
+  case: Partial<TWatchProducts>;
+  band: Partial<TWatchProducts>;
 }
 
 type TWatchFilterData = {
@@ -42,6 +49,26 @@ type TWatchFilterData = {
 
 interface TSizeFilterData extends TWatchFilterData {
   studioSwitchers: TStudioSwitchers[];
+}
+
+export interface TSelectedWatch {
+  size: string | null;
+  case: string | null;
+  band: string | null;
+  pdpName: string | null;
+  price: string;
+}
+
+export type TSelectedFilter =
+  | "watchSizeData"
+  | "watchCaseData"
+  | "watchBandData"
+  | null;
+
+export interface TSelectedOption {
+  size: string;
+  case: string;
+  band: string;
 }
 
 export interface TWatchContext {
@@ -66,8 +93,14 @@ export interface TWatchContext {
         [key in CollectionNames]: TWatchFilterData;
       }
     | null;
-  selectedFilter: "watchSizeData" | "watchCaseData" | "watchBandData" | null;
-  setSelectedFilter: Dispatch<SetStateAction<string | null>>;
+  selectedFilter: TSelectedFilter;
+  setSelectedFilter: Dispatch<
+    SetStateAction<"watchSizeData" | "watchCaseData" | "watchBandData" | null>
+  >;
+  selectedWatch: TSelectedWatch | null;
+  setSelectedWatch: Dispatch<SetStateAction<TSelectedWatch>>;
+  selectedOption: TSelectedOption | null;
+  setSelectedOption: Dispatch<SetStateAction<TSelectedOption>>;
 }
 
 export const WatchContext = createContext<TWatchContext>({
@@ -80,6 +113,10 @@ export const WatchContext = createContext<TWatchContext>({
   watchBandData: null,
   selectedFilter: null,
   setSelectedFilter: () => {},
+  selectedWatch: null,
+  setSelectedWatch: () => {},
+  selectedOption: null,
+  setSelectedOption: () => {},
 });
 
 export const useWatchContext = () => useContext(WatchContext);

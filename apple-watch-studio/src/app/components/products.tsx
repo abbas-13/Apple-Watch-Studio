@@ -1,9 +1,10 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect } from "react";
 
 import { TWatchViewTypes, WatchViewTypes } from "../page";
 import sideView from "../../../public/appleWatchSideView.png";
-import dial from "../../../public/appleWatchDial.png";
-import band from "../../../public/appleWatchBand.png";
 import { useWatchContext } from "../context/watchContext";
 import { WatchCarousel } from "./watchCarousel";
 
@@ -14,7 +15,29 @@ interface ProductsProps {
 }
 
 const Products = ({ isStarted, watchView, handleViewClick }: ProductsProps) => {
-  const { selectedCollectionData, selectedFilter } = useWatchContext();
+  const {
+    selectedCollectionData,
+    selectedFilter,
+    selectedWatch,
+    setSelectedWatch,
+  } = useWatchContext();
+
+  const productDetails = `${selectedWatch?.size} ${selectedWatch?.case} with ${selectedWatch?.band}`;
+
+  useEffect(() => {
+    setSelectedWatch((prev) => ({
+      ...prev,
+      pdpName: productDetails,
+      price:
+        selectedFilter === "watchSizeData"
+          ? selectedCollectionData?.size.fromPrice
+          : selectedFilter === "watchBandData"
+          ? selectedCollectionData?.band.fromPrice
+          : selectedFilter === "watchCaseData"
+          ? selectedCollectionData?.case.fromPrice
+          : "",
+    }));
+  }, [productDetails]);
 
   return (
     <div className="grid grid-rows-[80%_20%] block">
@@ -22,7 +45,7 @@ const Products = ({ isStarted, watchView, handleViewClick }: ProductsProps) => {
         <div
           className={`items-center transition-all flex justify-center ease-in-out transform ${
             isStarted
-              ? "scale-[0.52] duration-1000"
+              ? "scale-[0.48] duration-1000"
               : "translate-y-64 scale-100"
           } ${!selectedFilter ? "opacity-100" : "opacity-0 hidden"}`}
         >
@@ -38,19 +61,21 @@ const Products = ({ isStarted, watchView, handleViewClick }: ProductsProps) => {
             <>
               <Image
                 width={800}
+                height={800}
                 className={`absolute ${
                   watchView ? "quickTransition" : "greetingsAnimate"
                 }`}
                 alt="apple watch dial"
-                src={dial}
+                src={selectedCollectionData?.case.watchCaseImage}
               />
               <Image
                 width={800}
-                className={`-z-10 ${
+                height={800}
+                className={`-z-20 ${
                   watchView ? "quickTransition" : "greetingsAnimate"
                 }`}
                 alt="apple watch band"
-                src={band}
+                src={selectedCollectionData?.band.watchBandImage}
               />
             </>
           )}
@@ -61,10 +86,9 @@ const Products = ({ isStarted, watchView, handleViewClick }: ProductsProps) => {
             selectedFilter ? "opacity-100 h-content" : "opacity-0 hidden"
           }`}
         >
-          <WatchCarousel />
+          <WatchCarousel watchView={watchView} />
         </div>
       </div>
-
       <div
         className={`flex flex-col gap-[4px] text-[14px] items-center ${
           isStarted ? "opacity-100" : "opacity-0"
@@ -83,16 +107,18 @@ const Products = ({ isStarted, watchView, handleViewClick }: ProductsProps) => {
             : "Front view"}
         </button>
         <span className="font-sf font-semibold text-[12px] text-[#6e6e73]">
-          {selectedCollectionData?.size.products.collectionName}
+          {selectedCollectionData?.size.collectionName}
         </span>
         <span className="font-sf font-semibold text-[14px] text-[#1d1d1f]">
-          {selectedCollectionData?.size.products.productName}
+          {`${selectedWatch?.size} ${selectedWatch?.case} with ${selectedWatch?.band}`}
         </span>
         {/* used dangerouslySetInnerHTML because that is how we receive the data from the back end */}
         <span
           className="font-sf text-[14px]"
           dangerouslySetInnerHTML={{
-            __html: selectedCollectionData?.size.products.fromPrice || "",
+            __html: selectedFilter
+              ? selectedWatch?.price
+              : selectedCollectionData?.size.fromPrice,
           }}
         />
       </div>
