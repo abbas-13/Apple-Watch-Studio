@@ -7,14 +7,12 @@ import GreetingWrapper from "./components/greetingWrapper";
 import Header from "./components/header";
 import Actions from "./components/actions";
 import Products from "./components/products";
-import { TSelectedFilter, useWatchContext } from "./context/watchContext";
-
-export enum WatchViewTypes {
-  FRONT = "FRONT",
-  SIDE = "SIDE",
-}
-
-export type TWatchViewTypes = WatchViewTypes | null;
+import {
+  TSelectedFilter,
+  TWatchViewTypes,
+  useWatchContext,
+  WatchViewTypes,
+} from "./context/watchContext";
 
 export default function Home() {
   const { setSelectedFilter } = useWatchContext();
@@ -55,11 +53,7 @@ export default function Home() {
           handleViewClick={handleViewClick}
           watchView={watchView}
         />
-        <Actions
-          isStarted={isStarted}
-          toggleExpand={toggleExpand}
-          watchView={watchView}
-        />
+        <Actions isStarted={isStarted} toggleExpand={toggleExpand} />
       </div>
     </div>
   );

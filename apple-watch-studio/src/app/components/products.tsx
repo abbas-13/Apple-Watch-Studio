@@ -3,9 +3,12 @@
 import Image from "next/image";
 import { useEffect } from "react";
 
-import { TWatchViewTypes, WatchViewTypes } from "../page";
 import sideView from "../../../public/appleWatchSideView.png";
-import { useWatchContext } from "../context/watchContext";
+import {
+  TWatchViewTypes,
+  useWatchContext,
+  WatchViewTypes,
+} from "../context/watchContext";
 import { WatchCarousel } from "./watchCarousel";
 
 interface ProductsProps {
@@ -30,11 +33,11 @@ const Products = ({ isStarted, watchView, handleViewClick }: ProductsProps) => {
       pdpName: productDetails,
       price:
         selectedFilter === "watchSizeData"
-          ? selectedCollectionData?.size.fromPrice || "$0"
+          ? selectedCollectionData?.size?.fromPrice || "$0"
           : selectedFilter === "watchBandData"
-          ? selectedCollectionData?.band.fromPrice || "$0"
+          ? selectedCollectionData?.band?.fromPrice || "$0"
           : selectedFilter === "watchCaseData"
-          ? selectedCollectionData?.case.fromPrice || "$0"
+          ? selectedCollectionData?.case?.fromPrice || "$0"
           : "",
     }));
   }, [productDetails]);
@@ -107,7 +110,7 @@ const Products = ({ isStarted, watchView, handleViewClick }: ProductsProps) => {
             : "Front view"}
         </button>
         <span className="font-sf font-semibold text-[12px] text-[#6e6e73]">
-          {selectedCollectionData?.size.collectionName}
+          {selectedCollectionData?.size?.collectionName}
         </span>
         <span className="font-sf font-semibold text-[14px] text-[#1d1d1f]">
           {`${selectedWatch?.size} ${selectedWatch?.case} with ${selectedWatch?.band}`}
@@ -118,7 +121,7 @@ const Products = ({ isStarted, watchView, handleViewClick }: ProductsProps) => {
           dangerouslySetInnerHTML={{
             __html: selectedFilter
               ? (selectedWatch?.price as string)
-              : (selectedCollectionData?.size.fromPrice as string),
+              : (selectedCollectionData?.size?.fromPrice as string),
           }}
         />
       </div>

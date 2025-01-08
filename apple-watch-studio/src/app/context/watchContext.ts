@@ -37,9 +37,9 @@ export interface TWatchProducts {
 }
 
 export interface TSelectedCollectionData {
-  size: TWatchProducts;
-  case: TWatchProducts;
-  band: TWatchProducts;
+  size: TWatchProducts | null;
+  case: TWatchProducts | null;
+  band: TWatchProducts | null;
 }
 
 type TWatchFilterData = {
@@ -70,6 +70,13 @@ export interface TSelectedOption {
   case: string;
   band: string;
 }
+
+export enum WatchViewTypes {
+  FRONT = "FRONT",
+  SIDE = "SIDE",
+}
+
+export type TWatchViewTypes = WatchViewTypes | null;
 
 export interface TWatchContext {
   selectedCollection: CollectionNames;
