@@ -30,8 +30,6 @@ const Actions = ({ toggleExpand, isStarted }: ActionsProps) => {
     }));
   };
 
-  console.log(selectedCollectionData);
-
   return (
     <div
       className={`flex gap-3 justify-center items-center ${
@@ -45,17 +43,18 @@ const Actions = ({ toggleExpand, isStarted }: ActionsProps) => {
         {selectedFilter === "watchSizeData" ? (
           <div className="flex gap-3">
             <Image src={buttonSize} alt="watch size button logo" />
-            {rest[selectedFilter][selectedCollection].options.map((item) => (
-              <span
-                key={item.value}
-                onClick={() => handleOptionClick({ size: item.text })}
-                className={`cursor-pointer ${
-                  selectedWatch.size === item.text ? "font-semibold" : ""
-                } `}
-              >
-                {item.text}
-              </span>
-            ))}
+            {rest[selectedFilter] &&
+              rest[selectedFilter][selectedCollection].options.map((item) => (
+                <span
+                  key={item.value}
+                  onClick={() => handleOptionClick({ size: item.text })}
+                  className={`cursor-pointer ${
+                    selectedWatch?.size === item.text ? "font-semibold" : ""
+                  } `}
+                >
+                  {item.text}
+                </span>
+              ))}
           </div>
         ) : (
           <>
@@ -71,20 +70,21 @@ const Actions = ({ toggleExpand, isStarted }: ActionsProps) => {
         {selectedFilter === "watchCaseData" ? (
           <div className="flex gap-3">
             <Image src={buttonCase} alt="watch case button logo" />
-            {rest[selectedFilter][selectedCollection].options.map((item) => (
-              <span
-                key={item.value}
-                onClick={() => handleOptionClick({ case: item.text })}
-                className={`cursor-pointer ${
-                  selectedCollectionData?.case.dimension
-                    .watch_cases_dimensionCaseMaterial === item.value
-                    ? "font-semibold"
-                    : ""
-                }`}
-              >
-                {item.text}
-              </span>
-            ))}
+            {rest[selectedFilter] &&
+              rest[selectedFilter][selectedCollection].options.map((item) => (
+                <span
+                  key={item.value}
+                  onClick={() => handleOptionClick({ case: item.text })}
+                  className={`cursor-pointer ${
+                    selectedCollectionData?.case.dimension
+                      ?.watch_cases_dimensionCaseMaterial === item.value
+                      ? "font-semibold"
+                      : ""
+                  }`}
+                >
+                  {item.text}
+                </span>
+              ))}
           </div>
         ) : (
           <>
@@ -100,20 +100,21 @@ const Actions = ({ toggleExpand, isStarted }: ActionsProps) => {
         {selectedFilter === "watchBandData" ? (
           <div className="flex gap-3">
             <Image src={buttonBand} alt="watch band button logo" />
-            {rest[selectedFilter][selectedCollection].options.map((item) => (
-              <span
-                key={item.value}
-                onClick={() => handleOptionClick({ band: item.text })}
-                className={`cursor-pointer ${
-                  selectedCollectionData?.band.dimension
-                    .watch_bands_dimensionMaterial === item.value
-                    ? "font-semibold"
-                    : ""
-                }`}
-              >
-                {item.text}
-              </span>
-            ))}
+            {rest[selectedFilter] &&
+              rest[selectedFilter][selectedCollection].options.map((item) => (
+                <span
+                  key={item.value}
+                  onClick={() => handleOptionClick({ band: item.text })}
+                  className={`cursor-pointer ${
+                    selectedCollectionData?.band.dimension
+                      ?.watch_bands_dimensionMaterial === item.value
+                      ? "font-semibold"
+                      : ""
+                  }`}
+                >
+                  {item.text}
+                </span>
+              ))}
           </div>
         ) : (
           <>
