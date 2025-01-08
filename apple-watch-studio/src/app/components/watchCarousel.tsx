@@ -7,7 +7,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Mousewheel } from "swiper/modules";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
-import { useWatchContext } from "../context/watchContext";
+import {
+  TSelectedCollectionData,
+  TWatchProducts,
+  useWatchContext,
+} from "../context/watchContext";
 import { TWatchViewTypes, WatchViewTypes } from "../page";
 
 interface CarouselProps {
@@ -30,7 +34,7 @@ export const WatchCarousel = ({ watchView }: CarouselProps) => {
       if (selectedFilter && rest[selectedFilter]) {
         const productsList = rest[selectedFilter][
           selectedCollection
-        ].products.map((item: object) => ({
+        ].products.map((item: TWatchProducts) => ({
           frontView: item.frontView,
           sideView: item.sideView,
           case: item.watchCaseImage,
@@ -47,43 +51,50 @@ export const WatchCarousel = ({ watchView }: CarouselProps) => {
   );
 
   const slideChange = (index: number) => {
-    console.log(selectedCollectionData);
-    if (selectedFilter === "watchSizeData") {
-      setSelectedCollectionData((prev) => ({
-        ...prev,
-        size: rest[selectedFilter][selectedCollection].products[index],
-      }));
-      setSelectedWatch((prev) => ({
-        ...prev,
-        size: rest[selectedFilter][selectedCollection].options[index].text,
-      }));
-    } else if (selectedFilter === "watchBandData") {
-      setSelectedCollectionData((prev) => ({
-        ...prev,
-        band: rest[selectedFilter][selectedCollection].products[index],
-      }));
-      setSelectedWatch((prev) => ({
-        ...prev,
-        band: `${rest[selectedFilter][selectedCollection].products[
-          index
-        ].productName
-          .split("with")[1]
-          .trim()}`,
-      }));
-    } else if (selectedFilter === "watchCaseData") {
-      setSelectedCollectionData((prev) => ({
-        ...prev,
-        case: rest[selectedFilter][selectedCollection].products[index],
-      }));
-      setSelectedWatch((prev) => ({
-        ...prev,
-        case: `${rest[selectedFilter][selectedCollection].products[
-          index
-        ].productName
-          .split("with")[0]
-          .split("mm")[1]
-          .trim()}`,
-      }));
+    switch (selectedFilter) {
+      case "watchSizeData":
+        setSelectedCollectionData((prev) => ({
+          ...(prev as TSelectedCollectionData),
+          size: rest[selectedFilter][selectedCollection].products[index],
+        }));
+
+        setSelectedWatch((prev) => ({
+          ...prev,
+          size: rest[selectedFilter][selectedCollection].options[index].text,
+        }));
+        break;
+
+      case "watchBandData":
+        setSelectedCollectionData((prev) => ({
+          ...(prev as TSelectedCollectionData),
+          band: rest[selectedFilter][selectedCollection].products[index],
+        }));
+
+        setSelectedWatch((prev) => ({
+          ...prev,
+          band: `${rest[selectedFilter][selectedCollection].products[
+            index
+          ].productName
+            .split("with")[1]
+            .trim()}`,
+        }));
+        break;
+
+      case "watchCaseData":
+        setSelectedCollectionData((prev) => ({
+          ...(prev as TSelectedCollectionData),
+          case: rest[selectedFilter][selectedCollection].products[index],
+        }));
+        setSelectedWatch((prev) => ({
+          ...prev,
+          case: `${rest[selectedFilter][selectedCollection].products[
+            index
+          ].productName
+            .split("with")[0]
+            .split("mm")[1]
+            .trim()}`,
+        }));
+        break;
     }
   };
 

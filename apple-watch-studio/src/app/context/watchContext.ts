@@ -24,7 +24,7 @@ interface TDimension {
   watch_bands_dimensionMaterial: string;
 }
 
-interface TWatchProducts {
+export interface TWatchProducts {
   collectionName: string;
   fromPrice: string;
   frontView: string;
@@ -37,9 +37,9 @@ interface TWatchProducts {
 }
 
 export interface TSelectedCollectionData {
-  size: Partial<TWatchProducts>;
-  case: Partial<TWatchProducts>;
-  band: Partial<TWatchProducts>;
+  size: TWatchProducts;
+  case: TWatchProducts;
+  band: TWatchProducts;
 }
 
 type TWatchFilterData = {

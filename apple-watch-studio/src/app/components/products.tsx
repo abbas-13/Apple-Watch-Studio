@@ -30,11 +30,11 @@ const Products = ({ isStarted, watchView, handleViewClick }: ProductsProps) => {
       pdpName: productDetails,
       price:
         selectedFilter === "watchSizeData"
-          ? selectedCollectionData?.size.fromPrice
+          ? selectedCollectionData?.size.fromPrice || "$0"
           : selectedFilter === "watchBandData"
-          ? selectedCollectionData?.band.fromPrice
+          ? selectedCollectionData?.band.fromPrice || "$0"
           : selectedFilter === "watchCaseData"
-          ? selectedCollectionData?.case.fromPrice
+          ? selectedCollectionData?.case.fromPrice || "$0"
           : "",
     }));
   }, [productDetails]);
@@ -66,7 +66,7 @@ const Products = ({ isStarted, watchView, handleViewClick }: ProductsProps) => {
                   watchView ? "quickTransition" : "greetingsAnimate"
                 }`}
                 alt="apple watch dial"
-                src={selectedCollectionData?.case.watchCaseImage}
+                src={selectedCollectionData?.case?.watchCaseImage || ""}
               />
               <Image
                 width={800}
@@ -75,7 +75,7 @@ const Products = ({ isStarted, watchView, handleViewClick }: ProductsProps) => {
                   watchView ? "quickTransition" : "greetingsAnimate"
                 }`}
                 alt="apple watch band"
-                src={selectedCollectionData?.band.watchBandImage}
+                src={selectedCollectionData?.band?.watchBandImage || ""}
               />
             </>
           )}
@@ -117,8 +117,8 @@ const Products = ({ isStarted, watchView, handleViewClick }: ProductsProps) => {
           className="font-sf text-[14px]"
           dangerouslySetInnerHTML={{
             __html: selectedFilter
-              ? selectedWatch?.price
-              : selectedCollectionData?.size.fromPrice,
+              ? (selectedWatch?.price as string)
+              : (selectedCollectionData?.size.fromPrice as string),
           }}
         />
       </div>
