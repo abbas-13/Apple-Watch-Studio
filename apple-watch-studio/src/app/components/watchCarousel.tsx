@@ -10,9 +10,10 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import {
   TSelectedCollectionData,
   TWatchProducts,
+  TWatchViewTypes,
   useWatchContext,
+  WatchViewTypes,
 } from "../context/watchContext";
-import { TWatchViewTypes, WatchViewTypes } from "../page";
 
 interface CarouselProps {
   watchView: TWatchViewTypes;
@@ -55,44 +56,54 @@ export const WatchCarousel = ({ watchView }: CarouselProps) => {
       case "watchSizeData":
         setSelectedCollectionData((prev) => ({
           ...(prev as TSelectedCollectionData),
-          size: rest[selectedFilter][selectedCollection].products[index],
+          size:
+            rest[selectedFilter] &&
+            rest[selectedFilter][selectedCollection].products[index],
         }));
 
         setSelectedWatch((prev) => ({
           ...prev,
-          size: rest[selectedFilter][selectedCollection].options[index].text,
+          size:
+            rest[selectedFilter] &&
+            rest[selectedFilter][selectedCollection].options[index].text,
         }));
         break;
 
       case "watchBandData":
         setSelectedCollectionData((prev) => ({
           ...(prev as TSelectedCollectionData),
-          band: rest[selectedFilter][selectedCollection].products[index],
+          band:
+            rest[selectedFilter] &&
+            rest[selectedFilter][selectedCollection].products[index],
         }));
 
         setSelectedWatch((prev) => ({
           ...prev,
-          band: `${rest[selectedFilter][selectedCollection].products[
-            index
-          ].productName
-            .split("with")[1]
-            .trim()}`,
+          band: `${
+            rest[selectedFilter] &&
+            rest[selectedFilter][selectedCollection].products[index].productName
+              .split("with")[1]
+              .trim()
+          }`,
         }));
         break;
 
       case "watchCaseData":
         setSelectedCollectionData((prev) => ({
           ...(prev as TSelectedCollectionData),
-          case: rest[selectedFilter][selectedCollection].products[index],
+          case:
+            rest[selectedFilter] &&
+            rest[selectedFilter][selectedCollection].products[index],
         }));
         setSelectedWatch((prev) => ({
           ...prev,
-          case: `${rest[selectedFilter][selectedCollection].products[
-            index
-          ].productName
-            .split("with")[0]
-            .split("mm")[1]
-            .trim()}`,
+          case: `${
+            rest[selectedFilter] &&
+            rest[selectedFilter][selectedCollection].products[index].productName
+              .split("with")[0]
+              .split("mm")[1]
+              .trim()
+          }`,
         }));
         break;
     }
@@ -107,7 +118,7 @@ export const WatchCarousel = ({ watchView }: CarouselProps) => {
             width={416}
             height={416}
             alt="Selected Band"
-            src={selectedCollectionData?.case.watchCaseImage}
+            src={selectedCollectionData?.case?.watchCaseImage || ""}
             className="z-10"
           />
         </div>
@@ -118,7 +129,7 @@ export const WatchCarousel = ({ watchView }: CarouselProps) => {
             width={416}
             height={416}
             alt="Selected Band"
-            src={selectedCollectionData?.band.watchBandImage}
+            src={selectedCollectionData?.band?.watchBandImage || ""}
             className="-z-10"
           />
         </div>
@@ -170,7 +181,7 @@ export const WatchCarousel = ({ watchView }: CarouselProps) => {
                     ? item.band
                     : selectedFilter === "watchCaseData"
                     ? item.case
-                    : null
+                    : ""
                 }
               />
             )}

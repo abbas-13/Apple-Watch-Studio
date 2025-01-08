@@ -3,13 +3,11 @@ import Image from "next/image";
 import buttonBand from "../../../public/watchBand.svg";
 import buttonCase from "../../../public/watchCase.svg";
 import buttonSize from "../../../public/watchSize.svg";
-import { TWatchViewTypes } from "../page";
 import { TSelectedFilter, useWatchContext } from "../context/watchContext";
 
 interface ActionsProps {
   toggleExpand: (value: TSelectedFilter) => void;
   isStarted: boolean;
-  watchView: TWatchViewTypes;
 }
 
 const Actions = ({ toggleExpand, isStarted }: ActionsProps) => {
@@ -76,7 +74,7 @@ const Actions = ({ toggleExpand, isStarted }: ActionsProps) => {
                   key={item.value}
                   onClick={() => handleOptionClick({ case: item.text })}
                   className={`cursor-pointer ${
-                    selectedCollectionData?.case.dimension
+                    selectedCollectionData?.case?.dimension
                       ?.watch_cases_dimensionCaseMaterial === item.value
                       ? "font-semibold"
                       : ""
@@ -106,7 +104,7 @@ const Actions = ({ toggleExpand, isStarted }: ActionsProps) => {
                   key={item.value}
                   onClick={() => handleOptionClick({ band: item.text })}
                   className={`cursor-pointer ${
-                    selectedCollectionData?.band.dimension
+                    selectedCollectionData?.band?.dimension
                       ?.watch_bands_dimensionMaterial === item.value
                       ? "font-semibold"
                       : ""
