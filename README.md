@@ -20,7 +20,7 @@ A pixel-perfect clone of the Apple Watch Studio, built using **Next.js**. This a
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/<your-username>/apple-watch-studio-clone.git
+   git clone https://github.com/abbas-13/apple-watch-studio-clone.git
    cd apple-watch-studio-clone
    ```
 
