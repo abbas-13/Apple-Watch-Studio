@@ -96,14 +96,14 @@ const Actions = ({ toggleExpand, isStarted }: ActionsProps) => {
         className="flex items-center gap-2 font-sf bg-[#e8e8ed] leading-[-.022em] transition-all duration-500 transform ease-in text-[17px] rounded-full p-[10px] px-[22px]"
       >
         {selectedFilter === "watchBandData" ? (
-          <div className="flex gap-3">
+          <div className="flex gap-4">
             <Image src={buttonBand} alt="watch band button logo" />
             {rest[selectedFilter] &&
               rest[selectedFilter][selectedCollection].options.map((item) => (
                 <span
                   key={item.value}
                   onClick={() => handleOptionClick({ band: item.text })}
-                  className={`cursor-pointer ${
+                  className={`cursor-pointer text-nowrap ${
                     selectedCollectionData?.band?.dimension
                       ?.watch_bands_dimensionMaterial === item.value
                       ? "font-semibold"

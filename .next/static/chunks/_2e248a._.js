@@ -554,7 +554,7 @@ const Actions = ({ toggleExpand, isStarted })=>{
                 onClick: ()=>toggleExpand("watchBandData"),
                 className: "flex items-center gap-2 font-sf bg-[#e8e8ed] leading-[-.022em] transition-all duration-500 transform ease-in text-[17px] rounded-full p-[10px] px-[22px]",
                 children: selectedFilter === "watchBandData" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "flex gap-3",
+                    className: "flex gap-4",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                             src: __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$watchBand$2e$svg$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$public$2f$watchBand$2e$svg__$5b$app$2d$client$5d$__$28$static$2922$__$7d$__$5b$app$2d$client$5d$__$28$structured__image__object$2c$__ecmascript$29$__["default"],
@@ -568,7 +568,7 @@ const Actions = ({ toggleExpand, isStarted })=>{
                                 onClick: ()=>handleOptionClick({
                                         band: item.text
                                     }),
-                                className: `cursor-pointer ${selectedCollectionData?.band?.dimension?.watch_bands_dimensionMaterial === item.value ? "font-semibold" : ""}`,
+                                className: `cursor-pointer text-nowrap ${selectedCollectionData?.band?.dimension?.watch_bands_dimensionMaterial === item.value ? "font-semibold" : ""}`,
                                 children: item.text
                             }, item.value, false, {
                                 fileName: "[project]/src/app/components/actions.tsx",
@@ -654,6 +654,7 @@ __turbopack_esm__({
     "WatchCarousel": (()=>WatchCarousel)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/image.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$swiper$2f$swiper$2d$react$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/swiper/swiper-react.mjs [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$swiper$2f$modules$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_import__("[project]/node_modules/swiper/modules/index.mjs [app-client] (ecmascript) <module evaluation>");
@@ -664,6 +665,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$ico
 ;
 var _s = __turbopack_refresh__.signature();
 "use client";
+;
 ;
 ;
 ;
@@ -731,38 +733,42 @@ const WatchCarousel = ({ watchView })=>{
         className: "flex items-center h-full",
         children: [
             selectedFilter === "watchBandData" && watchView !== __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$context$2f$watchContext$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["WatchViewTypes"].SIDE ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "absolute w-1/4 z-10 justify-self-center inset-0 flex justify-center items-center z-10",
-                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                className: "absolute w-[360px] z-10 justify-self-center inset-0 flex justify-center items-center z-10",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                    width: 416,
+                    height: 416,
                     alt: "Selected Band",
                     src: selectedCollectionData?.case?.watchCaseImage || "",
-                    className: "z-10 w-full"
+                    className: "z-10"
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/watchCarousel.tsx",
-                    lineNumber: 116,
+                    lineNumber: 117,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/watchCarousel.tsx",
-                lineNumber: 115,
+                lineNumber: 116,
                 columnNumber: 9
             }, this) : selectedFilter === "watchCaseData" && watchView !== __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$context$2f$watchContext$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["WatchViewTypes"].SIDE ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "absolute -z-10 w-1/4 justify-self-center inset-0 flex justify-center items-center",
-                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                className: "absolute w-[360px] -z-10 justify-self-center inset-0 flex justify-center items-center",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                    width: 416,
+                    height: 416,
                     alt: "Selected Band",
                     src: selectedCollectionData?.band?.watchBandImage || "",
-                    className: "-z-10 w-full"
+                    className: "-z-10"
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/watchCarousel.tsx",
-                    lineNumber: 125,
+                    lineNumber: 128,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/watchCarousel.tsx",
-                lineNumber: 124,
+                lineNumber: 127,
                 columnNumber: 9
             }, this) : null,
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$swiper$2f$swiper$2d$react$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Swiper"], {
-                slidesPerView: 4,
+                slidesPerView: watchView === __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$context$2f$watchContext$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["WatchViewTypes"].FRONT ? 4 : 3,
                 centeredSlides: true,
                 initialSlide: 2,
                 spaceBetween: 0,
@@ -783,39 +789,35 @@ const WatchCarousel = ({ watchView })=>{
                 children: [
                     products?.map((item, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$swiper$2f$swiper$2d$react$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SwiperSlide"], {
                             children: index === activeIndex && watchView === __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$context$2f$watchContext$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["WatchViewTypes"].SIDE ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: `self-center${watchView ? "quickTransition" : "greetingsAnimate"}`,
-                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                                className: `${watchView ? "quickTransition" : "greetingsAnimate"}`,
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                    width: 416,
+                                    height: 416,
                                     alt: "apple watch side view",
-                                    src: item.sideView,
-                                    className: "-z-10 w-full"
+                                    src: item.sideView
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/components/watchCarousel.tsx",
-                                    lineNumber: 157,
+                                    lineNumber: 162,
                                     columnNumber: 17
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/watchCarousel.tsx",
-                                lineNumber: 152,
+                                lineNumber: 157,
                                 columnNumber: 15
-                            }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "flexjustify-center",
-                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                                    alt: "apple watch front view",
-                                    className: `w-full ${watchView ? "quickTransition" : "greetingsAnimate"}`,
-                                    src: selectedFilter === "watchSizeData" ? item.frontView : selectedFilter === "watchBandData" ? item.band : selectedFilter === "watchCaseData" ? item.case : ""
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/components/watchCarousel.tsx",
-                                    lineNumber: 165,
-                                    columnNumber: 17
-                                }, this)
+                            }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                width: 416,
+                                height: 416,
+                                alt: "apple watch front view",
+                                className: ` ${watchView ? "quickTransition" : "greetingsAnimate"}`,
+                                src: selectedFilter === "watchSizeData" ? item.frontView : selectedFilter === "watchBandData" ? item.band : selectedFilter === "watchCaseData" ? item.case : ""
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/watchCarousel.tsx",
-                                lineNumber: 164,
+                                lineNumber: 170,
                                 columnNumber: 15
                             }, this)
                         }, index, false, {
                             fileName: "[project]/src/app/components/watchCarousel.tsx",
-                            lineNumber: 150,
+                            lineNumber: 155,
                             columnNumber: 11
                         }, this)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -825,12 +827,12 @@ const WatchCarousel = ({ watchView })=>{
                             color: "#666668 "
                         }, void 0, false, {
                             fileName: "[project]/src/app/components/watchCarousel.tsx",
-                            lineNumber: 186,
+                            lineNumber: 192,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/watchCarousel.tsx",
-                        lineNumber: 185,
+                        lineNumber: 191,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -840,24 +842,24 @@ const WatchCarousel = ({ watchView })=>{
                             color: "#666668 "
                         }, void 0, false, {
                             fileName: "[project]/src/app/components/watchCarousel.tsx",
-                            lineNumber: 194,
+                            lineNumber: 200,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/watchCarousel.tsx",
-                        lineNumber: 189,
+                        lineNumber: 195,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/components/watchCarousel.tsx",
-                lineNumber: 132,
+                lineNumber: 137,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/components/watchCarousel.tsx",
-        lineNumber: 112,
+        lineNumber: 113,
         columnNumber: 5
     }, this);
 };
