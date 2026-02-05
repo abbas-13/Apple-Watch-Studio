@@ -353,6 +353,14 @@ img, video {
   margin-left: 1rem;
 }
 
+.ml-auto {
+  margin-left: auto;
+}
+
+.mr-auto {
+  margin-right: auto;
+}
+
 .mt-1 {
   margin-top: .25rem;
 }
@@ -401,12 +409,16 @@ img, video {
   height: 100%;
 }
 
-.w-80 {
-  width: 20rem;
+.min-h-\[45px\] {
+  min-height: 45px;
 }
 
-.w-\[360px\] {
-  width: 360px;
+.w-1\/3 {
+  width: 33.3333%;
+}
+
+.w-80 {
+  width: 20rem;
 }
 
 .w-auto {
@@ -421,12 +433,12 @@ img, video {
   width: 100vw;
 }
 
-.w-max {
-  width: max-content;
+.min-w-max {
+  min-width: max-content;
 }
 
-.max-w-max {
-  max-width: max-content;
+.max-w-full {
+  max-width: 100%;
 }
 
 .translate-y-0 {
@@ -491,6 +503,10 @@ img, video {
   align-items: center;
 }
 
+.justify-start {
+  justify-content: flex-start;
+}
+
 .justify-end {
   justify-content: flex-end;
 }
@@ -511,16 +527,20 @@ img, video {
   gap: .75rem;
 }
 
-.gap-\[4px\] {
-  gap: 4px;
-}
-
 .gap-4 {
   gap: 1rem;
 }
 
+.gap-\[4px\] {
+  gap: 4px;
+}
+
 .self-start {
   align-self: flex-start;
+}
+
+.self-center {
+  align-self: center;
 }
 
 .justify-self-center {
@@ -652,6 +672,11 @@ img, video {
 
 .text-\[64px\] {
   font-size: 64px;
+}
+
+.text-sm {
+  font-size: .875rem;
+  line-height: 1.25rem;
 }
 
 .font-\[400\] {
@@ -870,6 +895,12 @@ html, body {
 .hover\:text-blue-500:hover {
   --tw-text-opacity: 1;
   color: rgb(59 130 246 / var(--tw-text-opacity, 1));
+}
+
+@media (width >= 768px) {
+  .md\:w-1\/4 {
+    width: 25%;
+  }
 }
 
 /*# sourceMappingURL=src_app_globals_b52d8e.css.map*/

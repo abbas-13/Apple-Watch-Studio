@@ -12,7 +12,7 @@ import { watchBandData, watchCaseData, watchSizeData } from "../constants/data";
 
 export const WatchContextHolder = ({ children }: { children: ReactNode }) => {
   const [selectedCollection, setSelectedCollection] = useState(
-    CollectionNames.APPLE_WATCH_SERIES_10
+    CollectionNames.APPLE_WATCH_SERIES_10,
   );
   const [selectedCollectionData, setSelectedCollectionData] =
     useState<TSelectedCollectionData | null>({

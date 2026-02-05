@@ -4,6 +4,7 @@ import buttonBand from "../../../public/watchBand.svg";
 import buttonCase from "../../../public/watchCase.svg";
 import buttonSize from "../../../public/watchSize.svg";
 import { TSelectedFilter, useWatchContext } from "../context/watchContext";
+import { useIsMobile } from "../hooks/useMobile";
 
 interface ActionsProps {
   toggleExpand: (value: TSelectedFilter) => void;
@@ -19,6 +20,7 @@ const Actions = ({ toggleExpand, isStarted }: ActionsProps) => {
     selectedCollectionData,
     ...rest
   } = useWatchContext();
+  const isMobile = useIsMobile();
 
   const handleOptionClick = (selectedOption: object) => {
     const [[key, value]] = Object.entries(selectedOption);
@@ -30,13 +32,13 @@ const Actions = ({ toggleExpand, isStarted }: ActionsProps) => {
 
   return (
     <div
-      className={`flex gap-3 justify-center items-center ${
+      className={`flex gap-3 max-w-full ml-auto mr-auto items-center overflow-x-scroll px-4 ${selectedFilter === "watchBandData" ? "justify-start" : "justify-center"} ${
         isStarted ? "opacity-100" : "opacity-0"
       } transition-opacity duration-1000 delay-1000 ease-linear`}
     >
       <button
         onClick={() => toggleExpand("watchSizeData")}
-        className="flex items-center gap-2 font-sf bg-[#e8e8ed] leading-[-.022em] px-[22px] duration-250 transform ease-in text-[17px] rounded-full p-[10px]"
+        className="flex min-h-[45px] min-w-max items-center gap-2 font-sf bg-[#e8e8ed] leading-[-.022em] px-[22px] duration-250 transform ease-in text-[17px] rounded-full p-[10px]"
       >
         {selectedFilter === "watchSizeData" ? (
           <div className="flex gap-3">
@@ -46,7 +48,7 @@ const Actions = ({ toggleExpand, isStarted }: ActionsProps) => {
                 <span
                   key={item.value}
                   onClick={() => handleOptionClick({ size: item.text })}
-                  className={`cursor-pointer ${
+                  className={`cursor-pointer flex items-center text-sm md:text-md ${
                     selectedWatch?.size === item.text ? "font-semibold" : ""
                   } `}
                 >
@@ -57,13 +59,13 @@ const Actions = ({ toggleExpand, isStarted }: ActionsProps) => {
         ) : (
           <>
             <Image src={buttonSize} alt="watch size button logo" />
-            Size
+            {!isMobile && <span className="text-sm md:text-md">Size</span>}
           </>
         )}
       </button>
       <button
         onClick={() => toggleExpand("watchCaseData")}
-        className="flex items-center gap-2 font-sf bg-[#e8e8ed] leading-[-.022em] transition-all duration-250 transform ease-in text-[17px] rounded-full p-[10px] px-[22px]"
+        className="flex min-h-[45px] min-w-max items-center gap-2 font-sf bg-[#e8e8ed] leading-[-.022em] transition-all duration-250 transform ease-in text-[17px] rounded-full p-[10px] px-[22px]"
       >
         {selectedFilter === "watchCaseData" ? (
           <div className="flex gap-3">
@@ -73,7 +75,7 @@ const Actions = ({ toggleExpand, isStarted }: ActionsProps) => {
                 <span
                   key={item.value}
                   onClick={() => handleOptionClick({ case: item.text })}
-                  className={`cursor-pointer ${
+                  className={`cursor-pointer flex items-center text-sm md:text-md ${
                     selectedCollectionData?.case?.dimension
                       ?.watch_cases_dimensionCaseMaterial === item.value
                       ? "font-semibold"
@@ -87,13 +89,13 @@ const Actions = ({ toggleExpand, isStarted }: ActionsProps) => {
         ) : (
           <>
             <Image src={buttonCase} alt="watch case button logo" />
-            Case
+            {!isMobile && <span className="text-sm md:text-md">Case</span>}
           </>
         )}
       </button>
       <button
         onClick={() => toggleExpand("watchBandData")}
-        className="flex items-center gap-2 font-sf bg-[#e8e8ed] leading-[-.022em] transition-all duration-500 transform ease-in text-[17px] rounded-full p-[10px] px-[22px]"
+        className="flex  min-h-[45px] min-w-max items-center gap-2 font-sf bg-[#e8e8ed] leading-[-.022em] transition-all duration-500 transform ease-in text-[17px] rounded-full p-[10px] px-[22px]"
       >
         {selectedFilter === "watchBandData" ? (
           <div className="flex gap-4">
@@ -103,7 +105,7 @@ const Actions = ({ toggleExpand, isStarted }: ActionsProps) => {
                 <span
                   key={item.value}
                   onClick={() => handleOptionClick({ band: item.text })}
-                  className={`cursor-pointer text-nowrap ${
+                  className={`cursor-pointer flex items-center text-sm md:text-md text-nowrap ${
                     selectedCollectionData?.band?.dimension
                       ?.watch_bands_dimensionMaterial === item.value
                       ? "font-semibold"
@@ -117,7 +119,7 @@ const Actions = ({ toggleExpand, isStarted }: ActionsProps) => {
         ) : (
           <>
             <Image src={buttonBand} alt="watch band button logo" />
-            Band
+            {!isMobile && <span className="text-sm md:text-md">Band</span>}
           </>
         )}
       </button>

@@ -608,7 +608,7 @@ const Actions = ({ toggleExpand, isStarted })=>{
                 onClick: ()=>toggleExpand("watchBandData"),
                 className: "flex  min-h-[45px] min-w-max items-center gap-2 font-sf bg-[#e8e8ed] leading-[-.022em] transition-all duration-500 transform ease-in text-[17px] rounded-full p-[10px] px-[22px]",
                 children: selectedFilter === "watchBandData" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "flex gap-3",
+                    className: "flex gap-4",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                             src: __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$watchBand$2e$svg$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$public$2f$watchBand$2e$svg__$5b$app$2d$client$5d$__$28$static$2922$__$7d$__$5b$app$2d$client$5d$__$28$structured__image__object$2c$__ecmascript$29$__["default"],
@@ -622,7 +622,7 @@ const Actions = ({ toggleExpand, isStarted })=>{
                                 onClick: ()=>handleOptionClick({
                                         band: item.text
                                     }),
-                                className: `cursor-pointer flex items-center text-sm md:text-md ${selectedCollectionData?.band?.dimension?.watch_bands_dimensionMaterial === item.value ? "font-semibold" : ""}`,
+                                className: `cursor-pointer flex items-center text-sm md:text-md text-nowrap ${selectedCollectionData?.band?.dimension?.watch_bands_dimensionMaterial === item.value ? "font-semibold" : ""}`,
                                 children: item.text
                             }, item.value, false, {
                                 fileName: "[project]/src/app/components/actions.tsx",
