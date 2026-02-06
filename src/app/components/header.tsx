@@ -1,9 +1,9 @@
 import Image from "next/image";
+import { useState } from "react";
 
 import { CollectionsList } from "./collectionsList";
 import logo from "../../../public/appleWatchLogo.svg";
 import expandIcon from "../../../public/expandIcon.svg";
-import { useState } from "react";
 import { useWatchContext } from "../context/watchContext";
 
 interface HeaderProps {

@@ -16,16 +16,22 @@ const Actions = ({ toggleExpand, isStarted }: ActionsProps) => {
     selectedCollection,
     selectedFilter,
     selectedWatch,
-    selectedOption,
     setSelectedOption,
     selectedCollectionData,
     goToSlide,
-    swiperRef,
     ...rest
   } = useWatchContext();
   const isMobile = useIsMobile();
 
-  const handleOptionClick = (selectedOption: any) => {
+  interface THandleOptionClickArgs {
+    index: number;
+    value: string;
+    size?: string;
+    case?: string;
+    band?: string;
+  }
+
+  const handleOptionClick = (selectedOption: THandleOptionClickArgs) => {
     const [[key, value]] = Object.entries(selectedOption);
     setSelectedOption((prev) => ({
       ...prev,
@@ -34,21 +40,23 @@ const Actions = ({ toggleExpand, isStarted }: ActionsProps) => {
 
     if (selectedFilter === "watchBandData") {
       const indexValue =
-        rest[selectedFilter] &&
-        rest[selectedFilter][selectedCollection].products.findIndex(
-          (item) =>
-            item.dimension.watch_bands_dimensionMaterial ===
-            selectedOption.value,
-        );
+        (rest[selectedFilter] &&
+          rest[selectedFilter][selectedCollection].products.findIndex(
+            (item) =>
+              item.dimension.watch_bands_dimensionMaterial ===
+              selectedOption.value,
+          )) ||
+        0;
       if (indexValue !== -1) goToSlide(indexValue);
     } else if (selectedFilter === "watchCaseData") {
       const indexValue =
-        rest[selectedFilter] &&
-        rest[selectedFilter][selectedCollection].products.findIndex(
-          (item) =>
-            item.dimension.watch_cases_dimensionCaseMaterial ===
-            selectedOption.value,
-        );
+        (rest[selectedFilter] &&
+          rest[selectedFilter][selectedCollection].products.findIndex(
+            (item) =>
+              item.dimension.watch_cases_dimensionCaseMaterial ===
+              selectedOption.value,
+          )) ||
+        0;
       if (indexValue !== -1) goToSlide(indexValue);
     } else {
       goToSlide(selectedOption.index);

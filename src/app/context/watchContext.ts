@@ -1,4 +1,5 @@
 import { createContext, Dispatch, SetStateAction, useContext } from "react";
+import Swiper from "swiper";
 
 export enum CollectionNames {
   APPLE_WATCH_SERIES_10 = "Apple Watch Series 10",
@@ -109,8 +110,8 @@ export interface TWatchContext {
   setSelectedWatch: Dispatch<SetStateAction<TSelectedWatch>>;
   selectedOption: TSelectedOption | null;
   setSelectedOption: Dispatch<SetStateAction<TSelectedOption>>;
-  swiperRef: any | null;
-  goToSlide: (index: number | null) => void;
+  setSwiperInstance: Dispatch<SetStateAction<Swiper | null>>;
+  goToSlide: (index: number) => void;
 }
 
 export const WatchContext = createContext<TWatchContext>({
@@ -127,7 +128,7 @@ export const WatchContext = createContext<TWatchContext>({
   setSelectedWatch: () => {},
   selectedOption: null,
   setSelectedOption: () => {},
-  swiperRef: null,
+  setSwiperInstance: () => {},
   goToSlide: () => {},
 });
 

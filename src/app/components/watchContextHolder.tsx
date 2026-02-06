@@ -1,6 +1,8 @@
 "use client";
 
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
+import Swiper from "swiper";
+
 import {
   WatchContext,
   CollectionNames,
@@ -34,12 +36,10 @@ export const WatchContextHolder = ({ children }: { children: ReactNode }) => {
     case: "Titanium",
     band: "Solo Loop",
   });
-  const swiperRef = useRef<any>(null);
+  const [swiperInstance, setSwiperInstance] = useState<Swiper | null>(null);
 
-  const goToSlide = (index: number | null) => {
-    if (swiperRef.current && swiperRef.current.slideTo) {
-      swiperRef.current.slideTo(index, 300);
-    }
+  const goToSlide = (index: number) => {
+    swiperInstance?.slideTo(index, 300);
   };
 
   useEffect(() => {
@@ -91,7 +91,7 @@ export const WatchContextHolder = ({ children }: { children: ReactNode }) => {
         setSelectedWatch,
         selectedOption,
         setSelectedOption,
-        swiperRef,
+        setSwiperInstance,
         goToSlide,
       }}
     >
