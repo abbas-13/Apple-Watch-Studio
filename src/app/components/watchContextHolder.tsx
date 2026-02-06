@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import {
   WatchContext,
   CollectionNames,
@@ -12,7 +12,7 @@ import { watchBandData, watchCaseData, watchSizeData } from "../constants/data";
 
 export const WatchContextHolder = ({ children }: { children: ReactNode }) => {
   const [selectedCollection, setSelectedCollection] = useState(
-    CollectionNames.APPLE_WATCH_SERIES_10
+    CollectionNames.APPLE_WATCH_SERIES_10,
   );
   const [selectedCollectionData, setSelectedCollectionData] =
     useState<TSelectedCollectionData | null>({
@@ -29,10 +29,18 @@ export const WatchContextHolder = ({ children }: { children: ReactNode }) => {
     price: "",
   });
   const [selectedOption, setSelectedOption] = useState({
+    index: 1,
     size: "46mm",
     case: "Titanium",
     band: "Solo Loop",
   });
+  const swiperRef = useRef<any>(null);
+
+  const goToSlide = (index: number | null) => {
+    if (swiperRef.current && swiperRef.current.slideTo) {
+      swiperRef.current.slideTo(index, 300);
+    }
+  };
 
   useEffect(() => {
     setSelectedCollectionData({
@@ -83,6 +91,8 @@ export const WatchContextHolder = ({ children }: { children: ReactNode }) => {
         setSelectedWatch,
         selectedOption,
         setSelectedOption,
+        swiperRef,
+        goToSlide,
       }}
     >
       {children}

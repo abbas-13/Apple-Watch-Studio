@@ -32,7 +32,9 @@ export default function Home() {
 
   const handleViewClick = () => {
     setWatchView((prev) =>
-      prev === WatchViewTypes.FRONT ? WatchViewTypes.SIDE : WatchViewTypes.FRONT
+      prev === WatchViewTypes.FRONT
+        ? WatchViewTypes.SIDE
+        : WatchViewTypes.FRONT,
     );
   };
 

@@ -22,7 +22,7 @@ const Header = ({ isStarted }: HeaderProps) => {
     window.alert(
       `You selected ${selectedWatch?.pdpName} which starts from ${
         selectedWatch?.price.split(">")[1].split("<")[0]
-      }`
+      }`,
     );
   };
 
@@ -33,7 +33,7 @@ const Header = ({ isStarted }: HeaderProps) => {
           <Image alt="apple watch logo" width={90} src={logo} />
         </div>
         <div
-          className={`flex items-start justify-center ${
+          className={`flex items-center md:items-start justify-center ${
             isStarted ? "opacity-100" : "opacity-0"
           } transition-opacity duration-1000 ease-linear `}
         >

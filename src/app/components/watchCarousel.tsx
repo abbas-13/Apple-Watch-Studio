@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-
 import { useMemo, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Mousewheel } from "swiper/modules";
@@ -14,6 +13,7 @@ import {
   useWatchContext,
   WatchViewTypes,
 } from "../context/watchContext";
+import { useIsMobile } from "../hooks/useMobile";
 
 interface CarouselProps {
   watchView: TWatchViewTypes;
@@ -26,9 +26,11 @@ export const WatchCarousel = ({ watchView }: CarouselProps) => {
     setSelectedCollectionData,
     selectedFilter,
     setSelectedWatch,
+    swiperRef,
     ...rest
   } = useWatchContext();
   const [activeIndex, setActiveIndex] = useState(0);
+  const isMobile = useIsMobile();
 
   const products = useMemo(
     () => {
@@ -48,10 +50,11 @@ export const WatchCarousel = ({ watchView }: CarouselProps) => {
       return [];
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [selectedFilter, selectedCollection]
+    [selectedFilter, selectedCollection],
   );
 
   const slideChange = (index: number) => {
+    setActiveIndex(index);
     switch (selectedFilter) {
       case "watchSizeData":
         setSelectedCollectionData((prev) => ({
@@ -113,29 +116,28 @@ export const WatchCarousel = ({ watchView }: CarouselProps) => {
     <div className="flex items-center h-full">
       {selectedFilter === "watchBandData" &&
       watchView !== WatchViewTypes.SIDE ? (
-        <div className="absolute w-[360px] z-10 justify-self-center inset-0 flex justify-center items-center z-10">
-          <Image
-            width={416}
-            height={416}
+        <div className="absolute w-1/3 md:w-1/4 z-10 justify-self-center inset-0 flex justify-center items-center z-10">
+          <img
             alt="Selected Band"
             src={selectedCollectionData?.case?.watchCaseImage || ""}
-            className="z-10"
+            className="z-10 w-full"
           />
         </div>
       ) : selectedFilter === "watchCaseData" &&
         watchView !== WatchViewTypes.SIDE ? (
-        <div className="absolute w-[360px] -z-10 justify-self-center inset-0 flex justify-center items-center">
-          <Image
-            width={416}
-            height={416}
+        <div className="absolute -z-10 w-1/3 md:w-1/4 justify-self-center inset-0 flex justify-center items-center">
+          <img
             alt="Selected Band"
             src={selectedCollectionData?.band?.watchBandImage || ""}
-            className="-z-10"
+            className="-z-10 w-full"
           />
         </div>
       ) : null}
       <Swiper
-        slidesPerView={watchView === WatchViewTypes.FRONT ? 4 : 3}
+        slidesPerView={isMobile ? 3 : 4}
+        onSwiper={(swiper) => {
+          swiperRef.current = swiper;
+        }}
         centeredSlides={true}
         initialSlide={2}
         spaceBetween={0}
@@ -147,7 +149,6 @@ export const WatchCarousel = ({ watchView }: CarouselProps) => {
           prevEl: ".button-prev",
         }}
         onSlideChange={(swiper) => {
-          setActiveIndex(swiper.activeIndex);
           slideChange(swiper.activeIndex);
         }}
       >
@@ -155,35 +156,34 @@ export const WatchCarousel = ({ watchView }: CarouselProps) => {
           <SwiperSlide key={index}>
             {index === activeIndex && watchView === WatchViewTypes.SIDE ? (
               <div
-                className={`${
+                className={`self-center${
                   watchView ? "quickTransition" : "greetingsAnimate"
                 }`}
               >
-                <Image
-                  width={416}
-                  height={416}
+                <img
                   alt="apple watch side view"
                   src={item.sideView}
+                  className="-z-10 w-full"
                 />
               </div>
             ) : (
-              <Image
-                width={416}
-                height={416}
-                alt="apple watch front view"
-                className={` ${
-                  watchView ? "quickTransition" : "greetingsAnimate"
-                }`}
-                src={
-                  selectedFilter === "watchSizeData"
-                    ? item.frontView
-                    : selectedFilter === "watchBandData"
-                    ? item.band
-                    : selectedFilter === "watchCaseData"
-                    ? item.case
-                    : ""
-                }
-              />
+              <div className="flexjustify-center">
+                <img
+                  alt="apple watch front view"
+                  className={`w-full ${
+                    watchView ? "quickTransition" : "greetingsAnimate"
+                  }`}
+                  src={
+                    selectedFilter === "watchSizeData"
+                      ? item.frontView
+                      : selectedFilter === "watchBandData"
+                        ? item.band
+                        : selectedFilter === "watchCaseData"
+                          ? item.case
+                          : ""
+                  }
+                />
+              </div>
             )}
           </SwiperSlide>
         ))}

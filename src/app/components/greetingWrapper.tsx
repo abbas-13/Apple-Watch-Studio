@@ -9,7 +9,7 @@ const GreetingWrapper = ({
 }: GreetingWrapperProps) => {
   return (
     <div
-      className={`mt-14 flex flex-col z-10 justify-self-center transition-all ease-out ${
+      className={`mt-14 px-4 md:px-0 flex flex-col z-10 justify-self-center transition-all ease-out ${
         isStarted
           ? "opacity-0 pointer-events-none absolute"
           : "opacity-100 translate-y-0 relative mb-16"
