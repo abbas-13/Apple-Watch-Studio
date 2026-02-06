@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 import sideView from "../../../public/appleWatchSideView.png";
 import {
@@ -27,20 +27,23 @@ const Products = ({ isStarted, watchView, handleViewClick }: ProductsProps) => {
 
   const productDetails = `${selectedWatch?.size} ${selectedWatch?.case} with ${selectedWatch?.band}`;
 
+  const price = useMemo(() => {
+    if (selectedFilter === "watchSizeData")
+      return selectedCollectionData?.size?.fromPrice || "$0";
+    if (selectedFilter === "watchBandData")
+      return selectedCollectionData?.band?.fromPrice || "$0";
+    if (selectedFilter === "watchCaseData")
+      return selectedCollectionData?.case?.fromPrice || "$0";
+    return "";
+  }, [selectedFilter, selectedCollectionData]);
+
   useEffect(() => {
     setSelectedWatch((prev) => ({
       ...prev,
       pdpName: productDetails,
-      price:
-        selectedFilter === "watchSizeData"
-          ? selectedCollectionData?.size?.fromPrice || "$0"
-          : selectedFilter === "watchBandData"
-            ? selectedCollectionData?.band?.fromPrice || "$0"
-            : selectedFilter === "watchCaseData"
-              ? selectedCollectionData?.case?.fromPrice || "$0"
-              : "",
+      price,
     }));
-  }, [productDetails]);
+  }, [productDetails, price, setSelectedWatch]);
 
   return (
     <div className="grid grid-rows-[80%_20%] block">

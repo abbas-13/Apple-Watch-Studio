@@ -3,7 +3,6 @@
 import { useState } from "react";
 
 import GreetingWrapper from "./components/greetingWrapper";
-
 import Header from "./components/header";
 import Actions from "./components/actions";
 import Products from "./components/products";

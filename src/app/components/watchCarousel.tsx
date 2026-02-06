@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useMemo, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Mousewheel } from "swiper/modules";
@@ -26,7 +25,7 @@ export const WatchCarousel = ({ watchView }: CarouselProps) => {
     setSelectedCollectionData,
     selectedFilter,
     setSelectedWatch,
-    swiperRef,
+    setSwiperInstance,
     ...rest
   } = useWatchContext();
   const [activeIndex, setActiveIndex] = useState(0);
@@ -135,9 +134,7 @@ export const WatchCarousel = ({ watchView }: CarouselProps) => {
       ) : null}
       <Swiper
         slidesPerView={isMobile ? 3 : 4}
-        onSwiper={(swiper) => {
-          swiperRef.current = swiper;
-        }}
+        onSwiper={setSwiperInstance}
         centeredSlides={true}
         initialSlide={2}
         spaceBetween={0}
