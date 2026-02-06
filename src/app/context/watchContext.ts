@@ -66,6 +66,7 @@ export type TSelectedFilter =
   | null;
 
 export interface TSelectedOption {
+  index: number;
   size: string;
   case: string;
   band: string;
@@ -108,6 +109,8 @@ export interface TWatchContext {
   setSelectedWatch: Dispatch<SetStateAction<TSelectedWatch>>;
   selectedOption: TSelectedOption | null;
   setSelectedOption: Dispatch<SetStateAction<TSelectedOption>>;
+  swiperRef: any | null;
+  goToSlide: (index: number | null) => void;
 }
 
 export const WatchContext = createContext<TWatchContext>({
@@ -124,6 +127,8 @@ export const WatchContext = createContext<TWatchContext>({
   setSelectedWatch: () => {},
   selectedOption: null,
   setSelectedOption: () => {},
+  swiperRef: null,
+  goToSlide: () => {},
 });
 
 export const useWatchContext = () => useContext(WatchContext);

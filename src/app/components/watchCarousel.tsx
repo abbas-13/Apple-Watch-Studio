@@ -26,6 +26,7 @@ export const WatchCarousel = ({ watchView }: CarouselProps) => {
     setSelectedCollectionData,
     selectedFilter,
     setSelectedWatch,
+    swiperRef,
     ...rest
   } = useWatchContext();
   const [activeIndex, setActiveIndex] = useState(0);
@@ -53,6 +54,7 @@ export const WatchCarousel = ({ watchView }: CarouselProps) => {
   );
 
   const slideChange = (index: number) => {
+    setActiveIndex(index);
     switch (selectedFilter) {
       case "watchSizeData":
         setSelectedCollectionData((prev) => ({
@@ -133,6 +135,9 @@ export const WatchCarousel = ({ watchView }: CarouselProps) => {
       ) : null}
       <Swiper
         slidesPerView={isMobile ? 3 : 4}
+        onSwiper={(swiper) => {
+          swiperRef.current = swiper;
+        }}
         centeredSlides={true}
         initialSlide={2}
         spaceBetween={0}
@@ -144,7 +149,6 @@ export const WatchCarousel = ({ watchView }: CarouselProps) => {
           prevEl: ".button-prev",
         }}
         onSlideChange={(swiper) => {
-          setActiveIndex(swiper.activeIndex);
           slideChange(swiper.activeIndex);
         }}
       >

@@ -38,7 +38,9 @@ const WatchContext = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$projec
     selectedWatch: null,
     setSelectedWatch: ()=>{},
     selectedOption: null,
-    setSelectedOption: ()=>{}
+    setSelectedOption: ()=>{},
+    swiperRef: null,
+    goToSlide: ()=>{}
 });
 const useWatchContext = ()=>{
     _s();
@@ -4024,10 +4026,17 @@ const WatchContextHolder = ({ children })=>{
         price: ""
     });
     const [selectedOption, setSelectedOption] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
+        index: 1,
         size: "46mm",
         case: "Titanium",
         band: "Solo Loop"
     });
+    const swiperRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const goToSlide = (index)=>{
+        if (swiperRef.current && swiperRef.current.slideTo) {
+            swiperRef.current.slideTo(index, 300);
+        }
+    };
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "WatchContextHolder.useEffect": ()=>{
             setSelectedCollectionData({
@@ -4060,16 +4069,18 @@ const WatchContextHolder = ({ children })=>{
             selectedWatch,
             setSelectedWatch,
             selectedOption,
-            setSelectedOption
+            setSelectedOption,
+            swiperRef,
+            goToSlide
         },
         children: children
     }, void 0, false, {
         fileName: "[project]/src/app/components/watchContextHolder.tsx",
-        lineNumber: 71,
+        lineNumber: 79,
         columnNumber: 5
     }, this);
 };
-_s(WatchContextHolder, "m3JuN7EEv4zg/amlNbWb7nRNtDI=");
+_s(WatchContextHolder, "q9DfMbR3nP1QRCP8vqL2zlakTMM=");
 _c = WatchContextHolder;
 var _c;
 __turbopack_refresh__.register(_c, "WatchContextHolder");

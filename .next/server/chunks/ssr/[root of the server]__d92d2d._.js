@@ -45,7 +45,9 @@ const WatchContext = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$projec
     selectedWatch: null,
     setSelectedWatch: ()=>{},
     selectedOption: null,
-    setSelectedOption: ()=>{}
+    setSelectedOption: ()=>{},
+    swiperRef: null,
+    goToSlide: ()=>{}
 });
 const useWatchContext = ()=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useContext"])(WatchContext);
 }}),
@@ -4019,10 +4021,17 @@ const WatchContextHolder = ({ children })=>{
         price: ""
     });
     const [selectedOption, setSelectedOption] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])({
+        index: 1,
         size: "46mm",
         case: "Titanium",
         band: "Solo Loop"
     });
+    const swiperRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const goToSlide = (index)=>{
+        if (swiperRef.current && swiperRef.current.slideTo) {
+            swiperRef.current.slideTo(index, 300);
+        }
+    };
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         setSelectedCollectionData({
             size: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$constants$2f$data$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["watchSizeData"][selectedCollection].products[1],
@@ -4053,12 +4062,14 @@ const WatchContextHolder = ({ children })=>{
             selectedWatch,
             setSelectedWatch,
             selectedOption,
-            setSelectedOption
+            setSelectedOption,
+            swiperRef,
+            goToSlide
         },
         children: children
     }, void 0, false, {
         fileName: "[project]/src/app/components/watchContextHolder.tsx",
-        lineNumber: 71,
+        lineNumber: 79,
         columnNumber: 5
     }, this);
 };

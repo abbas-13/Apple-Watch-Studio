@@ -12,7 +12,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 ;
 const GreetingWrapper = ({ handleGetStarted, isStarted })=>{
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: `mt-14 flex flex-col z-10 justify-self-center transition-all ease-out ${isStarted ? "opacity-0 pointer-events-none absolute" : "opacity-100 translate-y-0 relative mb-16"} `,
+        className: `mt-14 px-4 md:px-0 flex flex-col z-10 justify-self-center transition-all ease-out ${isStarted ? "opacity-0 pointer-events-none absolute" : "opacity-100 translate-y-0 relative mb-16"} `,
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                 className: "font-sf text-[21px] font-[400] text-[#1d1d1f] leading-[1.381002381] pb-[10px]",
@@ -237,7 +237,7 @@ const Header = ({ isStarted })=>{
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: `flex items-start justify-center ${isStarted ? "opacity-100" : "opacity-0"} transition-opacity duration-1000 ease-linear `,
+                        className: `flex items-center md:items-start justify-center ${isStarted ? "opacity-100" : "opacity-0"} transition-opacity duration-1000 ease-linear `,
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                             onClick: handleClick,
                             className: "font-sf text-[17px] font-normal text-[#1d1d1f] leading-[1.4705882353] flex gap-1 justify-center items-center",
@@ -421,7 +421,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$hooks$2f$useMo
 ;
 ;
 const Actions = ({ toggleExpand, isStarted })=>{
-    const { selectedCollection, selectedFilter, selectedWatch, setSelectedOption, selectedCollectionData, ...rest } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$context$2f$watchContext$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useWatchContext"])();
+    const { selectedCollection, selectedFilter, selectedWatch, selectedOption, setSelectedOption, selectedCollectionData, goToSlide, swiperRef, ...rest } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$context$2f$watchContext$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useWatchContext"])();
     const isMobile = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$hooks$2f$useMobile$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useIsMobile"])();
     const handleOptionClick = (selectedOption)=>{
         const [[key, value]] = Object.entries(selectedOption);
@@ -429,6 +429,15 @@ const Actions = ({ toggleExpand, isStarted })=>{
                 ...prev,
                 [key]: value
             }));
+        if (selectedFilter === "watchBandData") {
+            const indexValue = rest[selectedFilter] && rest[selectedFilter][selectedCollection].products.findIndex((item)=>item.dimension.watch_bands_dimensionMaterial === selectedOption.value);
+            if (indexValue !== -1) goToSlide(indexValue);
+        } else if (selectedFilter === "watchCaseData") {
+            const indexValue = rest[selectedFilter] && rest[selectedFilter][selectedCollection].products.findIndex((item)=>item.dimension.watch_cases_dimensionCaseMaterial === selectedOption.value);
+            if (indexValue !== -1) goToSlide(indexValue);
+        } else {
+            goToSlide(selectedOption.index);
+        }
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: `flex gap-3 max-w-full ml-auto mr-auto items-center overflow-x-scroll px-4 ${selectedFilter === "watchBandData" ? "justify-start" : "justify-center"} ${isStarted ? "opacity-100" : "opacity-0"} transition-opacity duration-1000 delay-1000 ease-linear`,
@@ -444,24 +453,26 @@ const Actions = ({ toggleExpand, isStarted })=>{
                             alt: "watch size button logo"
                         }, void 0, false, {
                             fileName: "[project]/src/app/components/actions.tsx",
-                            lineNumber: 45,
+                            lineNumber: 70,
                             columnNumber: 13
                         }, this),
-                        rest[selectedFilter] && rest[selectedFilter][selectedCollection].options.map((item)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        rest[selectedFilter] && rest[selectedFilter][selectedCollection].options.map((item, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                 onClick: ()=>handleOptionClick({
-                                        size: item.text
+                                        index,
+                                        size: item.text,
+                                        value: item.value
                                     }),
                                 className: `cursor-pointer flex items-center text-sm md:text-md ${selectedWatch?.size === item.text ? "font-semibold" : ""} `,
                                 children: item.text
                             }, item.value, false, {
                                 fileName: "[project]/src/app/components/actions.tsx",
-                                lineNumber: 48,
-                                columnNumber: 17
+                                lineNumber: 74,
+                                columnNumber: 19
                             }, this))
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/components/actions.tsx",
-                    lineNumber: 44,
+                    lineNumber: 69,
                     columnNumber: 11
                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
                     children: [
@@ -470,7 +481,7 @@ const Actions = ({ toggleExpand, isStarted })=>{
                             alt: "watch size button logo"
                         }, void 0, false, {
                             fileName: "[project]/src/app/components/actions.tsx",
-                            lineNumber: 61,
+                            lineNumber: 94,
                             columnNumber: 13
                         }, this),
                         !isMobile && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -478,14 +489,14 @@ const Actions = ({ toggleExpand, isStarted })=>{
                             children: "Size"
                         }, void 0, false, {
                             fileName: "[project]/src/app/components/actions.tsx",
-                            lineNumber: 62,
+                            lineNumber: 95,
                             columnNumber: 27
                         }, this)
                     ]
                 }, void 0, true)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/actions.tsx",
-                lineNumber: 39,
+                lineNumber: 64,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -499,24 +510,26 @@ const Actions = ({ toggleExpand, isStarted })=>{
                             alt: "watch case button logo"
                         }, void 0, false, {
                             fileName: "[project]/src/app/components/actions.tsx",
-                            lineNumber: 72,
+                            lineNumber: 105,
                             columnNumber: 13
                         }, this),
-                        rest[selectedFilter] && rest[selectedFilter][selectedCollection].options.map((item)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        rest[selectedFilter] && rest[selectedFilter][selectedCollection].options.map((item, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                 onClick: ()=>handleOptionClick({
-                                        case: item.text
+                                        index,
+                                        case: item.text,
+                                        value: item.value
                                     }),
                                 className: `cursor-pointer flex items-center text-sm md:text-md ${selectedCollectionData?.case?.dimension?.watch_cases_dimensionCaseMaterial === item.value ? "font-semibold" : ""}`,
                                 children: item.text
                             }, item.value, false, {
                                 fileName: "[project]/src/app/components/actions.tsx",
-                                lineNumber: 75,
-                                columnNumber: 17
+                                lineNumber: 109,
+                                columnNumber: 19
                             }, this))
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/components/actions.tsx",
-                    lineNumber: 71,
+                    lineNumber: 104,
                     columnNumber: 11
                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
                     children: [
@@ -525,7 +538,7 @@ const Actions = ({ toggleExpand, isStarted })=>{
                             alt: "watch case button logo"
                         }, void 0, false, {
                             fileName: "[project]/src/app/components/actions.tsx",
-                            lineNumber: 91,
+                            lineNumber: 132,
                             columnNumber: 13
                         }, this),
                         !isMobile && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -533,14 +546,14 @@ const Actions = ({ toggleExpand, isStarted })=>{
                             children: "Case"
                         }, void 0, false, {
                             fileName: "[project]/src/app/components/actions.tsx",
-                            lineNumber: 92,
+                            lineNumber: 133,
                             columnNumber: 27
                         }, this)
                     ]
                 }, void 0, true)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/actions.tsx",
-                lineNumber: 66,
+                lineNumber: 99,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -554,24 +567,26 @@ const Actions = ({ toggleExpand, isStarted })=>{
                             alt: "watch band button logo"
                         }, void 0, false, {
                             fileName: "[project]/src/app/components/actions.tsx",
-                            lineNumber: 102,
+                            lineNumber: 143,
                             columnNumber: 13
                         }, this),
-                        rest[selectedFilter] && rest[selectedFilter][selectedCollection].options.map((item)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        rest[selectedFilter] && rest[selectedFilter][selectedCollection].options.map((item, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                 onClick: ()=>handleOptionClick({
-                                        band: item.text
+                                        index,
+                                        band: item.text,
+                                        value: item.value
                                     }),
                                 className: `cursor-pointer flex items-center text-sm md:text-md text-nowrap ${selectedCollectionData?.band?.dimension?.watch_bands_dimensionMaterial === item.value ? "font-semibold" : ""}`,
                                 children: item.text
                             }, item.value, false, {
                                 fileName: "[project]/src/app/components/actions.tsx",
-                                lineNumber: 105,
-                                columnNumber: 17
+                                lineNumber: 147,
+                                columnNumber: 19
                             }, this))
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/components/actions.tsx",
-                    lineNumber: 101,
+                    lineNumber: 142,
                     columnNumber: 11
                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
                     children: [
@@ -580,7 +595,7 @@ const Actions = ({ toggleExpand, isStarted })=>{
                             alt: "watch band button logo"
                         }, void 0, false, {
                             fileName: "[project]/src/app/components/actions.tsx",
-                            lineNumber: 121,
+                            lineNumber: 170,
                             columnNumber: 13
                         }, this),
                         !isMobile && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -588,20 +603,20 @@ const Actions = ({ toggleExpand, isStarted })=>{
                             children: "Band"
                         }, void 0, false, {
                             fileName: "[project]/src/app/components/actions.tsx",
-                            lineNumber: 122,
+                            lineNumber: 171,
                             columnNumber: 27
                         }, this)
                     ]
                 }, void 0, true)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/actions.tsx",
-                lineNumber: 96,
+                lineNumber: 137,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/components/actions.tsx",
-        lineNumber: 34,
+        lineNumber: 59,
         columnNumber: 5
     }, this);
 };
@@ -657,7 +672,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$ico
 ;
 ;
 const WatchCarousel = ({ watchView })=>{
-    const { selectedCollection, selectedCollectionData, setSelectedCollectionData, selectedFilter, setSelectedWatch, ...rest } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$context$2f$watchContext$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useWatchContext"])();
+    const { selectedCollection, selectedCollectionData, setSelectedCollectionData, selectedFilter, setSelectedWatch, swiperRef, ...rest } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$context$2f$watchContext$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useWatchContext"])();
     const [activeIndex, setActiveIndex] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
     const isMobile = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$hooks$2f$useMobile$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useIsMobile"])();
     const products = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useMemo"])(()=>{
@@ -677,6 +692,7 @@ const WatchCarousel = ({ watchView })=>{
         selectedCollection
     ]);
     const slideChange = (index)=>{
+        setActiveIndex(index);
         switch(selectedFilter){
             case "watchSizeData":
                 setSelectedCollectionData((prev)=>({
@@ -721,12 +737,12 @@ const WatchCarousel = ({ watchView })=>{
                     className: "z-10 w-full"
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/watchCarousel.tsx",
-                    lineNumber: 118,
+                    lineNumber: 120,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/watchCarousel.tsx",
-                lineNumber: 117,
+                lineNumber: 119,
                 columnNumber: 9
             }, this) : selectedFilter === "watchCaseData" && watchView !== __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$context$2f$watchContext$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["WatchViewTypes"].SIDE ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "absolute -z-10 w-1/3 md:w-1/4 justify-self-center inset-0 flex justify-center items-center",
@@ -736,16 +752,19 @@ const WatchCarousel = ({ watchView })=>{
                     className: "-z-10 w-full"
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/watchCarousel.tsx",
-                    lineNumber: 127,
+                    lineNumber: 129,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/watchCarousel.tsx",
-                lineNumber: 126,
+                lineNumber: 128,
                 columnNumber: 9
             }, this) : null,
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$swiper$2f$swiper$2d$react$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Swiper"], {
                 slidesPerView: isMobile ? 3 : 4,
+                onSwiper: (swiper)=>{
+                    swiperRef.current = swiper;
+                },
                 centeredSlides: true,
                 initialSlide: 2,
                 spaceBetween: 0,
@@ -760,7 +779,6 @@ const WatchCarousel = ({ watchView })=>{
                     prevEl: ".button-prev"
                 },
                 onSlideChange: (swiper)=>{
-                    setActiveIndex(swiper.activeIndex);
                     slideChange(swiper.activeIndex);
                 },
                 children: [
@@ -773,12 +791,12 @@ const WatchCarousel = ({ watchView })=>{
                                     className: "-z-10 w-full"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/components/watchCarousel.tsx",
-                                    lineNumber: 159,
+                                    lineNumber: 163,
                                     columnNumber: 17
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/watchCarousel.tsx",
-                                lineNumber: 154,
+                                lineNumber: 158,
                                 columnNumber: 15
                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "flexjustify-center",
@@ -788,17 +806,17 @@ const WatchCarousel = ({ watchView })=>{
                                     src: selectedFilter === "watchSizeData" ? item.frontView : selectedFilter === "watchBandData" ? item.band : selectedFilter === "watchCaseData" ? item.case : ""
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/components/watchCarousel.tsx",
-                                    lineNumber: 167,
+                                    lineNumber: 171,
                                     columnNumber: 17
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/watchCarousel.tsx",
-                                lineNumber: 166,
+                                lineNumber: 170,
                                 columnNumber: 15
                             }, this)
                         }, index, false, {
                             fileName: "[project]/src/app/components/watchCarousel.tsx",
-                            lineNumber: 152,
+                            lineNumber: 156,
                             columnNumber: 11
                         }, this)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -808,12 +826,12 @@ const WatchCarousel = ({ watchView })=>{
                             color: "#666668 "
                         }, void 0, false, {
                             fileName: "[project]/src/app/components/watchCarousel.tsx",
-                            lineNumber: 188,
+                            lineNumber: 192,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/watchCarousel.tsx",
-                        lineNumber: 187,
+                        lineNumber: 191,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -823,24 +841,24 @@ const WatchCarousel = ({ watchView })=>{
                             color: "#666668 "
                         }, void 0, false, {
                             fileName: "[project]/src/app/components/watchCarousel.tsx",
-                            lineNumber: 196,
+                            lineNumber: 200,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/watchCarousel.tsx",
-                        lineNumber: 191,
+                        lineNumber: 195,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/components/watchCarousel.tsx",
-                lineNumber: 134,
+                lineNumber: 136,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/components/watchCarousel.tsx",
-        lineNumber: 114,
+        lineNumber: 116,
         columnNumber: 5
     }, this);
 };
@@ -973,7 +991,7 @@ const Products = ({ isStarted, watchView, handleViewClick })=>{
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                        className: "font-sf font-semibold text-[14px] text-[#1d1d1f]",
+                        className: "font-sf font-semibold text-[14px] text-[#1d1d1f] text-center",
                         children: `${selectedWatch?.size} ${selectedWatch?.case} with ${selectedWatch?.band}`
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/products.tsx",
@@ -1051,7 +1069,7 @@ function Home() {
                 isStarted: isStarted
             }, void 0, false, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 41,
+                lineNumber: 43,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1062,7 +1080,7 @@ function Home() {
                         isStarted: isStarted
                     }, void 0, false, {
                         fileName: "[project]/src/app/page.tsx",
-                        lineNumber: 47,
+                        lineNumber: 49,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$products$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1071,7 +1089,7 @@ function Home() {
                         watchView: watchView
                     }, void 0, false, {
                         fileName: "[project]/src/app/page.tsx",
-                        lineNumber: 51,
+                        lineNumber: 53,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$actions$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1079,19 +1097,19 @@ function Home() {
                         toggleExpand: toggleExpand
                     }, void 0, false, {
                         fileName: "[project]/src/app/page.tsx",
-                        lineNumber: 56,
+                        lineNumber: 58,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 42,
+                lineNumber: 44,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/page.tsx",
-        lineNumber: 40,
+        lineNumber: 42,
         columnNumber: 5
     }, this);
 }

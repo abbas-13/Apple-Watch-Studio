@@ -35,10 +35,10 @@ const Products = ({ isStarted, watchView, handleViewClick }: ProductsProps) => {
         selectedFilter === "watchSizeData"
           ? selectedCollectionData?.size?.fromPrice || "$0"
           : selectedFilter === "watchBandData"
-          ? selectedCollectionData?.band?.fromPrice || "$0"
-          : selectedFilter === "watchCaseData"
-          ? selectedCollectionData?.case?.fromPrice || "$0"
-          : "",
+            ? selectedCollectionData?.band?.fromPrice || "$0"
+            : selectedFilter === "watchCaseData"
+              ? selectedCollectionData?.case?.fromPrice || "$0"
+              : "",
     }));
   }, [productDetails]);
 
@@ -104,15 +104,15 @@ const Products = ({ isStarted, watchView, handleViewClick }: ProductsProps) => {
           {watchView === null || undefined
             ? "Front View"
             : watchView === WatchViewTypes.FRONT
-            ? "Side view"
-            : watchView === WatchViewTypes.SIDE
-            ? "Front view"
-            : "Front view"}
+              ? "Side view"
+              : watchView === WatchViewTypes.SIDE
+                ? "Front view"
+                : "Front view"}
         </button>
         <span className="font-sf font-semibold text-[12px] text-[#6e6e73]">
           {selectedCollectionData?.size?.collectionName}
         </span>
-        <span className="font-sf font-semibold text-[14px] text-[#1d1d1f]">
+        <span className="font-sf font-semibold text-[14px] text-[#1d1d1f] text-center">
           {`${selectedWatch?.size} ${selectedWatch?.case} with ${selectedWatch?.band}`}
         </span>
         {/* used dangerouslySetInnerHTML because that is how we receive the data from the back end */}
