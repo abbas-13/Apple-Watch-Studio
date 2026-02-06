@@ -2,6 +2,8 @@
 
 A pixel-perfect clone of the Apple Watch Studio, built using **Next.js**. This application replicates the seamless customization experience of the Apple Watch, allowing users to explore and select different sizes, cases, and bands with a smooth user interface.
 
+[Live Demo](http://apple-watch-studio-blush.vercel.app/)
+
 ## Features
 
 - **Interactive Carousel**: Implemented with [Swiper](https://swiperjs.com) for smooth navigation between options.
